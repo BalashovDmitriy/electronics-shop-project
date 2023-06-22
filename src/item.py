@@ -32,7 +32,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open("src/items.csv", encoding='CP1251') as file:
+        with open("../src/items.csv", encoding='CP1251') as file:
             dict_ = csv.DictReader(file, delimiter=",")
             for row in dict_:
                 Item.all.append(Item(row['name'], int(row['price']), int(row['quantity'])))
