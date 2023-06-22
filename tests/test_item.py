@@ -13,7 +13,7 @@ def test_apply_discount(example):
     assert example.price == 8000
 
 
-def test_string_to_number(example):
+def test_string_to_number():
     assert Item.string_to_number('5.5') == 5
     assert Item.string_to_number('3') == 3
 
