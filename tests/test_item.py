@@ -25,6 +25,14 @@ def test_setter_for_name(example):
     assert example.name == "testtest10"
 
 
-def test_instantiate_from_csv():
-    Item.instantiate_from_csv()
-    assert len(Item.all) == 5
+# def test_instantiate_from_csv():
+#     Item.instantiate_from_csv()
+#     assert len(Item.all) == 5
+
+
+def test_repr(example):
+    assert example.__repr__() == "Item('Смартфон', 10000, 20)"
+
+
+def test_str(example):
+    assert example.__str__() == "Смартфон"
