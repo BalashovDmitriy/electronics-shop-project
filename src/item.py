@@ -35,13 +35,12 @@ class Item:
         with open("../src/items.csv", encoding='CP1251') as file:
             dict_ = csv.DictReader(file, delimiter=",")
             for row in dict_:
-                Item.all.append(Item(row['name'], int(row['price']), int(row['quantity'])))
+                Item.all.append(Item(row['name'], Item.string_to_number(row['price']),
+                                     Item.string_to_number(row['quantity'])))
 
     @staticmethod
     def string_to_number(str_):
-        if '.' in str_:
-            return int(str_.split(".")[0])
-        return int(str_)
+        return int(float(str_))
 
     def calculate_total_price(self) -> float:
         """
@@ -56,3 +55,9 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        return self.__name
