@@ -36,3 +36,8 @@ def test_repr(example):
 
 def test_str(example):
     assert example.__str__() == "Смартфон"
+
+
+def test_add(example, example_phone):
+    assert example + example_phone == 25
+    assert example_phone + example_phone == 10
