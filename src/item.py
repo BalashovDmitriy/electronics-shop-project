@@ -56,6 +56,11 @@ class Item:
         """
         self.price *= self.pay_rate
 
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return self.quantity + other.quantity
+        return Exception
+
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
