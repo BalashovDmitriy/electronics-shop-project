@@ -4,10 +4,10 @@ from src.item import Item
 class Mixin:
 
     def change_lang(self):
-        if self.language == 'EN':
-            self.language = 'RU'
+        if self._language == 'EN':
+            self._language = 'RU'
         else:
-            self.language = 'EN'
+            self._language = 'EN'
         return self
 
 
@@ -15,8 +15,8 @@ class KeyBoard(Item, Mixin):
 
     def __init__(self, name, price, quantity):
         super().__init__(name, price, quantity)
-        self.language = 'EN'
+        self._language = 'EN'
 
     @property
     def language(self):
-        return self.language
+        return self._language
