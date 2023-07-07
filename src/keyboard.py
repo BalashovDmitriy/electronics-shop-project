@@ -18,5 +18,4 @@ class Mixin:
 
 
 class KeyBoard(Item, Mixin):
-
     pass
