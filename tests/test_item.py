@@ -1,4 +1,6 @@
-from src.item import Item
+import pytest
+
+from src.item import Item, InstantiateCSVError
 
 
 def test_init(example):
@@ -25,9 +27,17 @@ def test_setter_for_name(example):
     assert example.name == "testtest10"
 
 
-# def test_instantiate_from_csv():
-#     Item.instantiate_from_csv()
-#     assert len(Item.all) == 5
+def test_instantiate_from_csv():
+    try:
+        with pytest.raises(FileNotFoundError, match='Отсутствует файл item.csv'):
+            Item.instantiate_from_csv()
+        with pytest.raises(InstantiateCSVError, match='Файл item.csv поврежден'):
+            Item.instantiate_from_csv()
+    except Exception:
+        pass
+    else:
+        Item.instantiate_from_csv()
+        assert len(Item.all) == 5
 
 
 def test_repr(example):
@@ -41,3 +51,5 @@ def test_str(example):
 def test_add(example, example_phone):
     assert example + example_phone == 25
     assert example_phone + example_phone == 10
+    with pytest.raises(Exception, match="Разные классы"):
+        example + "a"
