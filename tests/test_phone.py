@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_phone_init(example_phone):
     assert example_phone.name == 'iPhone 14'
     assert example_phone.price == 120_000
@@ -16,3 +19,5 @@ def test_phone_repr(example_phone):
 def test_phone_number_of_sim_setter(example_phone):
     example_phone.number_of_sim = 1
     assert example_phone.number_of_sim == 1
+    with pytest.raises(ValueError):
+        example_phone.number_of_sim = 0
