@@ -15,7 +15,7 @@ class Item:
     pay_rate = 1.0
     all = []
 
-    def __init__(self, name: str, price: float, quantity: int) -> None:
+    def __init__(self, name: str, price: int, quantity: int) -> None:
         """
         Создание экземпляра класса item.
 
@@ -39,15 +39,14 @@ class Item:
         self.__name = new_name
 
     @classmethod
-    def instantiate_from_csv(cls):
-        file = "../src/items.csv"
+    def instantiate_from_csv(cls, file="../src/items.csv"):
         if not os.path.exists(file):
-            raise FileNotFoundError('Отсутствует файл item.csv')
+            raise FileNotFoundError('Отсутствует файл items.csv')
         with open(file, encoding='CP1251') as file:
             dict_ = csv.DictReader(file, delimiter=",")
             for row in dict_:
                 if len(row) < 3:
-                    raise InstantiateCSVError('Файл item.csv поврежден')
+                    raise InstantiateCSVError('Файл items.csv поврежден')
                 Item.all.append(Item(row['name'], Item.string_to_number(row['price']),
                                      Item.string_to_number(row['quantity'])))
 

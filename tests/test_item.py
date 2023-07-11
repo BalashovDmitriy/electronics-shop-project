@@ -1,6 +1,11 @@
 import pytest
 
 from src.item import Item, InstantiateCSVError
+import pathlib
+from pathlib import Path
+
+file = Path(pathlib.Path.cwd(), 'src', 'items.csv')
+damaged_file = Path(pathlib.Path.cwd(), 'src', 'items_damaged.csv')
 
 
 def test_init(example):
@@ -28,16 +33,12 @@ def test_setter_for_name(example):
 
 
 def test_instantiate_from_csv():
-    try:
-        with pytest.raises(FileNotFoundError, match='Отсутствует файл item.csv'):
-            Item.instantiate_from_csv()
-        with pytest.raises(InstantiateCSVError, match='Файл item.csv поврежден'):
-            Item.instantiate_from_csv()
-    except Exception:
-        pass
-    else:
-        Item.instantiate_from_csv()
-        assert len(Item.all) == 5
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv("file")
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv(damaged_file)
+    Item.instantiate_from_csv(file)
+    assert len(Item.all) == 5
 
 
 def test_repr(example):
