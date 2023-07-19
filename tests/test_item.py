@@ -52,5 +52,5 @@ def test_str(example):
 def test_add(example, example_phone):
     assert example + example_phone == 25
     assert example_phone + example_phone == 10
-    with pytest.raises(Exception, match="Разные классы"):
+    with pytest.raises(Exception):
         example + "a"

@@ -5,7 +5,7 @@ import os
 class InstantiateCSVError(Exception):
 
     def __init__(self, message):
-        print(message)
+        super().__init__(message)
 
 
 class Item:
